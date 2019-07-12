@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <ul class="list" id="list" style="background: #fff">
+      <li class="item"></li>
+      <li style="color: pink">水滴互助</li>
+      <li style="color: skyblue">水滴筹</li>
+      <li style="color: limegreen">水滴保</li>
+      <li style="background: #eee">
+        <span>水滴互助</span>
+        <span>水滴筹</span>
+        <span>水滴保</span>
+      </li>
+      <li>
+        <div>
+          水滴
+          <p>123456789</p>
+        </div>
+      </li>
+    </ul>
+    <ul class="list2" style="background: lightseagreen">
+      <li class="item">水滴💧</li>
+      <li style="color: skyblue">
+        <span>水滴互助</span>
+        <span>水滴筹</span>
+        <span>水滴保</span>
+      </li>
+      <li style="background: pink">水滴保</li>
+      <li style="background: orchid; color: skyblue">水滴互助</li>
+      <li>水滴筹</li>
+    </ul>
+  </div>
+</body>
+<script src="./build.js"></script>
+<script>
+  let app = document.querySelector('#app')
+  let list = document.querySelector('.list')
+  let list2 = document.querySelector('.list2')
+
+  let tree = toVritualDom(list) // 转为虚拟dom
+  let newTree = toVritualDom(list2)
+
+  let ulRoot = tree.render()  // 渲染
+  app.appendChild(ulRoot)
+
+  let patches = diff(tree, newTree)
+  console.log(patches, 'patches')
+
+  patch(ulRoot, patches)
+
+</script>
+</html>
